@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI Trip Planner
 
-## Getting Started
+A full-stack AI-powered Trip Advisor web application.
 
-First, run the development server:
+## Tech Stack
+- **Frontend**: Next.js (App Router), Tailwind CSS v4, ShadCN UI, Framer Motion, react-map-gl, mapbox-gl.
+- **Backend**: FastAPI (Python), Uvicorn, Pydantic.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Prerequisites
+- Node.js (v18+)
+- Python (3.9+)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Setup & Running
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 1. Backend
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Navigate to the `backend` directory:
+   ```bash
+   cd backend
+   ```
+2. (Optional but recommended) Create a virtual environment:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\\Scripts\\activate
+   ```
+3. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+4. Create a `.env` file in the `backend` folder and add your OpenAI Key (optional - system falls back to mock data if key is not valid or just "mock-key"):
+   ```env
+   OPENAI_API_KEY=your_openai_key_here
+   ```
+5. Run the server:
+   ```bash
+   uvicorn main:app --reload --host 0.0.0.0 --port 8000
+   ```
+   The API will be available at `http://localhost:8000`.
 
-## Learn More
+### 2. Frontend
 
-To learn more about Next.js, take a look at the following resources:
+1. Navigate to the `frontend` directory:
+   ```bash
+   cd frontend
+   ```
+2. Install dependencies (if not already installed):
+   ```bash
+   npm install
+   ```
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
+   The app will be available at `http://localhost:3000`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Features Included
+1. **Landing Page**: Modern UI with glassmorphism and animated gradients.
+2. **Planner Form**: Select destination, travelers, dates, budget, interests, and preferences.
+3. **Results Page**: See the AI-generated (mocked or real) itinerary, recommended hotels/restaurants, and a per-person budget breakdown. Weather widget integrated.
+4. **Interactive Map**: Built with `react-map-gl` and Mapbox to show real locations.
+5. **Chat Assistant Page**: Ask queries to the travel assistant.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deploying
+- **Frontend** can be easily deployed to Vercel. 
+- **Backend** can be containerized and deployed to Render, Railway, or AWS.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Enjoy your trip planning!
