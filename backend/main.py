@@ -166,6 +166,49 @@ def get_weather(destination: str = "Any"):
     # Mocking weather since we don't have a real weather API connected
     return {"forecast": "Sunny, 26°C"}
 
+@app.post("/packing-list")
+def get_packing_list(request: schemas.TripRequest):
+    try:
+        prompt = f"""
+        Generate a comprehensive, itemized packing list for a trip to {request.destination}.
+        Duration: {request.travel_dates}
+        Travelers: {request.travelers}
+        Age Group: {request.age_group}
+        Budget: {request.budget}
+        Interests: {", ".join(request.interests)}
+        Stay: {request.stay_pref}
+
+        Analyze the likely weather for {request.destination} during these dates and suggest appropriate clothing.
+        
+        Respond ONLY with a JSON object in this exact format:
+        {{
+            "weather_forecast": "Short weather summary",
+            "categories": [
+                {{
+                    "name": "Clothing",
+                    "items": ["Item 1", "Item 2"]
+                }},
+                {{
+                    "name": "Essentials",
+                    "items": ["Passport", "Charger"]
+                }}
+            ],
+            "pro_tip": "One expert travel tip for this specific destination"
+        }}
+        """
+        
+        response = client.chat.completions.create(
+            model="gpt-4o",
+            messages=[{"role": "user", "content": prompt}],
+            response_format={ "type": "json_object" }
+        )
+        
+        packing_list = json.loads(response.choices[0].message.content)
+        return {"status": "success", "data": packing_list}
+
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
+
 @app.get("/")
 def read_root():
     return {"message": "AI Trip Planner API is running"}
