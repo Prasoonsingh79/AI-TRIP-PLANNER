@@ -6,10 +6,10 @@ export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
   // Define public paths that DON'T require a token
-  const isPublicPath = pathname.startsWith('/auth')
+  const isPublicPath = pathname === '/' || pathname.startsWith('/auth')
 
   if (!token && !isPublicPath) {
-    // Redirect to login if trying to access a protected route (including /) without a token cookie
+    // Redirect to login if trying to access a protected route (Planner, Packing, etc.) without a token cookie
     return NextResponse.redirect(new URL('/auth/login', request.url))
   }
 

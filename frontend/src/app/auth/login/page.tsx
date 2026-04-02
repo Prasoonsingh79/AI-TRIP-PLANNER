@@ -15,6 +15,7 @@ export default function LoginPage() {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,19 +35,45 @@ export default function LoginPage() {
         throw new Error(data.detail || "Login failed");
       }
 
-      // Store token in localStorage and cookies for middleware
+      // Store token in localStorage and cookies (SESSION ONLY - no max-age)
       localStorage.setItem("token", data.access_token);
-      document.cookie = `token=${data.access_token}; path=/; max-age=86400; SameSite=Lax`;
-      router.push("/planner");
+      document.cookie = `token=${data.access_token}; path=/; SameSite=Lax`;
+      
+      setSuccess(true);
+      setTimeout(() => {
+        router.push("/planner");
+      }, 1500);
+      
     } catch (err: any) {
       setError(err.message);
     } finally {
-      setLoading(false);
+      if (!success) setLoading(false);
     }
   };
 
   return (
     <div className="min-h-screen bg-slate-950 flex justify-center items-center py-12 px-4 overflow-hidden relative selection:bg-cyan-500/30">
+      
+      {/* Success Popup Overlay */}
+      {success && (
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 backdrop-blur-xl"
+        >
+          <motion.div 
+            initial={{ scale: 0.8, y: 20 }}
+            animate={{ scale: 1, y: 0 }}
+            className="p-10 rounded-[3rem] bg-white text-slate-950 flex flex-col items-center gap-4 text-center shadow-2xl shadow-indigo-500/20"
+          >
+            <div className="w-20 h-20 rounded-full bg-emerald-500 flex items-center justify-center text-white">
+               <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>
+            </div>
+            <h3 className="text-2xl font-black tracking-tight">Login Successful!</h3>
+            <p className="text-slate-500 font-medium">Entering your neural itinerary engine...</p>
+          </motion.div>
+        </motion.div>
+      )}
       <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-cyan-600/20 blur-[120px] pointer-events-none" />
       <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] rounded-full bg-fuchsia-600/20 blur-[120px] pointer-events-none" />
 
