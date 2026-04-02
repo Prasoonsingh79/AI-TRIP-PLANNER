@@ -42,13 +42,13 @@ const steps = [
 
 export default function Home() {
   return (
-    <div className="relative min-h-screen pt-20 overflow-hidden bg-slate-950 font-sans selection:bg-indigo-500/40">
+    <div className="relative min-h-screen pt-20 overflow-hidden bg-white font-sans selection:bg-indigo-500/10 selection:text-indigo-900">
       
-      {/* Dynamic Background Blobs - Enhanced */}
+      {/* Dynamic Background Blobs - Enhanced for Light Theme */}
       <div className="fixed inset-0 z-0 pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[1000px] h-[1000px] bg-indigo-600/10 blur-[180px] rounded-full animate-pulse" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[800px] h-[800px] bg-fuchsia-600/10 blur-[180px] rounded-full animate-pulse" style={{ animationDelay: '2s' }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-600/5 blur-[150px] rounded-full" />
+        <div className="absolute top-[-10%] left-[-10%] w-[1000px] h-[1000px] bg-indigo-500/5 blur-[180px] rounded-full animate-pulse" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[800px] h-[800px] bg-fuchsia-500/5 blur-[180px] rounded-full animate-pulse" style={{ animationDelay: '2s' }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-500/5 blur-[150px] rounded-full" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8 py-12 lg:py-24 space-y-32">
@@ -58,20 +58,20 @@ export default function Home() {
             <motion.div 
                initial={{ opacity: 0, scale: 0.8 }}
                animate={{ opacity: 1, scale: 1 }}
-               className="inline-flex items-center gap-3 bg-white/5 border border-white/10 px-5 py-2.5 rounded-full shadow-2xl backdrop-blur-md"
+               className="inline-flex items-center gap-3 bg-white border border-slate-200 px-5 py-2.5 rounded-full shadow-xl"
             >
               <Badge className="bg-indigo-600 text-white font-bold border-none h-6 px-3">NEW v2.0</Badge>
-              <span className="text-xs font-bold uppercase tracking-[0.25em] text-slate-300">The Future of Travel is Here</span>
+              <span className="text-[10px] font-black uppercase tracking-[0.25em] text-slate-500">The Future of Travel is Here</span>
             </motion.div>
 
             <motion.h1 
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="text-6xl md:text-9xl font-black tracking-tighter text-white leading-[0.9]"
+              className="text-6xl md:text-9xl font-black tracking-tighter text-slate-900 leading-[0.9]"
             >
               Travel Smarter <br/> 
-              <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-400 via-cyan-400 to-indigo-400 animate-gradient-x">
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 via-indigo-400 to-indigo-600 animate-gradient-x">
                 Plan Better.
               </span>
             </motion.h1>
@@ -80,9 +80,9 @@ export default function Home() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6 }}
-              className="text-2xl md:text-3xl text-slate-400 font-medium tracking-tight h-10 max-w-2xl mx-auto"
+              className="text-xl md:text-2xl text-slate-500 font-medium tracking-tight h-10 max-w-2xl mx-auto"
             >
-              Tailored adventures for <span className="text-white font-bold border-b-2 border-indigo-500/50">
+              Tailored adventures for <span className="text-slate-900 font-bold border-b-2 border-indigo-500/20">
                 <Typewriter 
                   words={["Digital Nomads", "Backpackers", "Luxury Seekers", "Solo Travelers", "Families"]}
                   loop={0}
@@ -102,33 +102,52 @@ export default function Home() {
               className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-10"
             >
               <Link href="/planner">
-                <Button className="h-16 px-12 text-lg bg-indigo-600 hover:bg-indigo-500 text-white rounded-[2rem] shadow-2xl shadow-indigo-500/30 font-bold group transition-all duration-300">
+                <Button className="h-16 px-12 text-lg bg-indigo-600 hover:bg-slate-900 text-white rounded-[2rem] shadow-2xl shadow-indigo-500/20 font-bold group transition-all duration-300 border-none">
                    Get Started Free 
                    <ArrowRight className="ml-3 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
               <Link href="/auth/login">
-                <Button variant="outline" className="h-16 px-12 text-lg text-white border-white/10 bg-white/5 hover:bg-white/10 rounded-[2rem] transition-all duration-300 font-semibold backdrop-blur-sm">
+                <Button variant="outline" className="h-16 px-12 text-lg text-slate-900 border-slate-200 bg-white hover:bg-slate-50 rounded-[2rem] transition-all duration-300 font-semibold shadow-sm">
                    Watch Demo
                 </Button>
               </Link>
             </motion.div>
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.2 }}
+              className="relative pt-20"
+            >
+               <div className="absolute inset-0 z-0 bg-indigo-500/5 blur-[120px] rounded-full scale-110 pointer-events-none" />
+               <motion.div 
+                 animate={{ y: [0, -15, 0] }}
+                 transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                 className="relative z-10 max-w-3xl mx-auto rounded-[3rem] p-1 bg-white/20 backdrop-blur-3xl border border-white/50 shadow-3xl group"
+               >
+                 <img src="/world_map.png" alt="Global Adventures" className="w-full h-auto rounded-[2.8rem] transition-transform duration-700 group-hover:scale-105" />
+                 <div className="absolute inset-0 bg-linear-to-tr from-white/10 via-transparent to-white/10 pointer-events-none" />
+               </motion.div>
+            </motion.div>
         </section>
 
         {/* --- Trusted By Section --- */}
-        <section className="text-center pt-20 border-t border-white/5">
-           <p className="text-slate-500 text-sm font-bold uppercase tracking-widest mb-10">Loved by travelers from around the globe</p>
-           <div className="flex flex-wrap justify-center gap-10 md:gap-20 opacity-30 grayscale invert">
-              <Globe className="w-10 h-10" />
-              <Plane className="w-10 h-10" />
-              <MapPin className="w-10 h-10" />
-              <Compass className="w-10 h-10" />
-              <Heart className="w-10 h-10" />
+        <section className="text-center pt-20 border-t border-slate-100">
+           <p className="text-slate-400 text-[10px] font-black uppercase tracking-widest mb-10">Loved by travelers from around the globe</p>
+           <div className="flex flex-wrap justify-center gap-10 md:gap-20 opacity-30 grayscale saturate-0">
+              <Globe className="w-8 h-8" />
+              <Plane className="w-8 h-8" />
+              <MapPin className="w-8 h-8" />
+              <Compass className="w-8 h-8" />
+              <Heart className="w-8 h-8" />
            </div>
         </section>
 
         {/* --- Feature Grid --- */}
-        <section className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <section className="relative grid grid-cols-1 md:grid-cols-3 gap-8">
+           <div className="absolute inset-0 z-0 pointer-events-none opacity-50 overflow-hidden">
+              <img src="/patterns.png" alt="" className="absolute top-0 right-0 w-96 h-96 blur-2xl animate-pulse" />
+           </div>
            {features.map((f, i) => (
              <motion.div
                key={i}
@@ -137,15 +156,15 @@ export default function Home() {
                viewport={{ once: true }}
                transition={{ delay: f.delay }}
              >
-                <Card className="group relative overflow-hidden h-full bg-linear-to-b from-white/7 to-transparent border-white/5 hover:border-indigo-500/30 transition-all duration-500 rounded-[2.5rem] p-6 shadow-2xl">
+                <Card className="group relative overflow-hidden h-full bg-white border-slate-100 hover:border-indigo-500/20 transition-all duration-500 rounded-[2.5rem] p-6 shadow-xl shadow-slate-200/50">
                    <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/5 blur-3xl rounded-full group-hover:bg-indigo-500/10 transition-all" />
                    <CardContent className="p-4 space-y-8 relative z-10">
-                      <div className={`w-16 h-16 rounded-3xl bg-linear-to-tr ${f.color} flex items-center justify-center shadow-2xl group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500`}>
+                      <div className={`w-16 h-16 rounded-3xl bg-linear-to-tr ${f.color} flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500`}>
                          <f.icon className="w-8 h-8 text-white shadow-sm" />
                       </div>
                       <div className="space-y-3">
-                        <h3 className="text-2xl font-black text-white tracking-tight">{f.title}</h3>
-                        <p className="text-slate-400 text-base leading-relaxed">{f.desc}</p>
+                        <h3 className="text-2xl font-black text-slate-900 tracking-tight">{f.title}</h3>
+                        <p className="text-slate-500 text-sm font-medium leading-relaxed">{f.desc}</p>
                       </div>
                    </CardContent>
                 </Card>
@@ -154,46 +173,44 @@ export default function Home() {
         </section>
 
         {/* --- "How it Works" Section --- */}
-        <section className="bg-white/2 border border-white/5 rounded-[4rem] p-12 md:p-24 relative overflow-hidden">
+        <section className="bg-slate-50/50 border border-slate-200 rounded-[4rem] p-12 md:p-24 relative overflow-hidden">
            <div className="absolute top-0 right-0 w-full h-full bg-linear-to-br from-indigo-500/5 via-transparent to-fuchsia-500/5 pointer-events-none" />
            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
               <div className="space-y-12">
                  <div className="space-y-4">
-                    <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter leading-tight">
+                    <h2 className="text-4xl md:text-6xl font-black text-slate-900 tracking-tighter leading-tight">
                        The simplest way to <br/>
-                       <span className="text-indigo-400">explore the world.</span>
+                       <span className="text-indigo-600">explore the world.</span>
                     </h2>
-                    <p className="text-slate-400 text-lg md:text-xl font-medium">
+                    <p className="text-slate-600 text-lg md:text-xl font-medium leading-relaxed">
                        We've distilled travel planning down to its essence. No more endless tabs, no more guesswork.
                     </p>
                  </div>
                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                     {steps.map((s, idx) => (
                       <div key={idx} className="space-y-2">
-                         <div className="text-indigo-500 font-black text-sm tracking-widest">{s.step}</div>
-                         <h4 className="text-white font-bold text-lg">{s.title}</h4>
-                         <p className="text-slate-500 text-sm">{s.desc}</p>
+                         <div className="text-indigo-600 font-black text-[10px] tracking-widest">{s.step}</div>
+                         <h4 className="text-slate-900 font-bold text-lg">{s.title}</h4>
+                         <p className="text-slate-500 text-sm font-medium">{s.desc}</p>
                       </div>
                     ))}
                  </div>
               </div>
-              <div className="relative group">
-                 <div className="absolute -inset-4 bg-indigo-500/20 blur-3xl rounded-full group-hover:bg-indigo-500/30 transition-all animate-pulse" />
-                 <div className="relative aspect-square rounded-[3rem] bg-slate-900 border border-white/10 shadow-3xl overflow-hidden">
-                    {/* Simplified UI Mockup for visuals */}
-                    <div className="absolute inset-0 p-8 flex flex-col gap-6">
-                        <div className="h-12 w-3/4 bg-white/5 rounded-2xl animate-pulse" />
-                        <div className="h-40 w-full bg-white/5 rounded-3xl animate-pulse" style={{ animationDelay: '0.2s' }} />
-                        <div className="flex gap-4">
-                           <div className="h-10 w-24 bg-indigo-600/50 rounded-xl" />
-                           <div className="h-10 w-24 bg-white/5 rounded-xl" />
-                        </div>
-                        <div className="space-y-3 mt-auto">
-                           <div className="h-4 w-full bg-white/5 rounded-full" />
-                           <div className="h-4 w-5/6 bg-white/5 rounded-full" />
-                        </div>
-                    </div>
-                 </div>
+              <div className="relative group perspective-1000">
+                 <div className="absolute -inset-10 bg-indigo-500/10 blur-[120px] rounded-full group-hover:bg-indigo-500/20 transition-all animate-pulse" />
+                 <motion.div 
+                    initial={{ opacity: 0, rotateY: 20, scale: 0.9 }}
+                    whileInView={{ opacity: 1, rotateY: 0, scale: 1 }}
+                    transition={{ duration: 1, ease: "easeOut" }}
+                    className="relative aspect-square rounded-[4rem] bg-white/20 backdrop-blur-3xl border border-white/50 shadow-3xl overflow-hidden group-hover:scale-105 transition-all duration-700"
+                 >
+                    <img 
+                      src="/hero_graphic.png" 
+                      alt="Travel Hero" 
+                      className="w-full h-full object-cover transform scale-110 group-hover:scale-125 transition-transform duration-1000"
+                    />
+                    <div className="absolute inset-0 bg-linear-to-tr from-indigo-500/10 to-transparent pointer-events-none" />
+                 </motion.div>
               </div>
            </div>
         </section>
@@ -203,63 +220,63 @@ export default function Home() {
            initial={{ opacity: 0, y: 40 }}
            whileInView={{ opacity: 1, y: 0 }}
            viewport={{ once: true }}
-           className="p-12 md:p-16 rounded-[4rem] border border-white/10 bg-linear-to-br from-white/5 to-white/2 backdrop-blur-3xl flex flex-wrap justify-around gap-12 text-center shadow-3xl"
+           className="p-12 md:p-16 rounded-[4rem] border border-slate-200 bg-white shadow-3xl flex flex-wrap justify-around gap-12 text-center"
         >
           {[
-             { val: "50k+", label: "Trips Planned", color: "text-indigo-400" },
-             { val: "194", label: "Countries Covered", color: "text-fuchsia-400" },
-             { val: "4.9/5", label: "Global Rating", color: "text-cyan-400" },
-             { val: "99.9%", label: "Satisfaction", color: "text-emerald-400" }
+             { val: "50k+", label: "Trips Planned", color: "text-indigo-600" },
+             { val: "194", label: "Countries Covered", color: "text-fuchsia-600" },
+             { val: "4.9/5", label: "Global Rating", color: "text-cyan-600" },
+             { val: "99.9%", label: "Satisfaction", color: "text-emerald-600" }
           ].map((stat, i) => (
-            <div key={i} className="space-y-3 group cursor-default">
-               <div className="text-5xl md:text-6xl font-black text-white group-hover:scale-110 transition-transform duration-300">{stat.val}</div>
-               <div className={`text-xs uppercase font-black tracking-[0.3em] ${stat.color} shadow-sm`}>{stat.label}</div>
-            </div>
+             <div key={i} className="space-y-3 group cursor-default">
+                <div className="text-5xl md:text-6xl font-black text-slate-900 group-hover:scale-110 group-hover:text-indigo-600 transition-all duration-300">{stat.val}</div>
+                <div className={`text-[10px] uppercase font-black tracking-[0.3em] ${stat.color}`}>{stat.label}</div>
+             </div>
           ))}
         </motion.div>
 
         {/* --- Footer Upgrade --- */}
-        <footer className="pt-20 pb-10 border-t border-white/5 space-y-16">
+        <footer className="pt-20 pb-10 border-t border-slate-100 space-y-16">
            <div className="flex flex-col md:flex-row justify-between items-start gap-12">
               <div className="space-y-6 max-w-xs transition-all">
                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center text-white font-black text-lg shadow-xl shadow-indigo-600/20">A</div>
-                    <span className="font-black tracking-tighter text-2xl text-white">AI Advisor</span>
+                    <div className="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center text-white font-black text-lg shadow-xl shadow-indigo-600/10">A</div>
+                    <span className="font-black tracking-tighter text-2xl text-slate-900">AI Advisor</span>
                  </div>
-                 <p className="text-slate-400 text-sm font-medium leading-relaxed">
+                 <p className="text-slate-500 text-sm font-medium leading-relaxed">
                    Redefining how humanity explores the planet, one intelligent itinerary at a time. Join the revolution.
                  </p>
               </div>
               
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-12 md:gap-24">
                  <div className="space-y-4">
-                    <h5 className="text-white font-bold text-sm tracking-widest uppercase">Explore</h5>
+                    <h5 className="text-slate-900 font-bold text-sm tracking-widest uppercase">Explore</h5>
                     <div className="flex flex-col gap-3 text-sm text-slate-500 font-semibold">
-                       <Link href="/planner" className="hover:text-indigo-400 transition-colors">Planner</Link>
-                       <Link href="/map" className="hover:text-indigo-400 transition-colors">Map View</Link>
-                       <Link href="/chat" className="hover:text-indigo-400 transition-colors">AI Chat</Link>
+                       <Link href="/planner" className="hover:text-indigo-600 transition-colors">Planner</Link>
+                       <Link href="/map" className="hover:text-indigo-600 transition-colors">Map View</Link>
+                       <Link href="/chat" className="hover:text-indigo-600 transition-colors">AI Chat</Link>
                     </div>
                  </div>
                  <div className="space-y-4">
-                    <h5 className="text-white font-bold text-sm tracking-widest uppercase">Company</h5>
+                    <h5 className="text-slate-900 font-bold text-sm tracking-widest uppercase">Company</h5>
                     <div className="flex flex-col gap-3 text-sm text-slate-500 font-semibold">
-                       <Link href="#" className="hover:text-indigo-400 transition-colors">About</Link>
-                       <Link href="#" className="hover:text-indigo-400 transition-colors">Careers</Link>
-                       <Link href="#" className="hover:text-indigo-400 transition-colors">Contact</Link>
+                       <Link href="#" className="hover:text-indigo-600 transition-colors">About</Link>
+                       <Link href="#" className="hover:text-indigo-600 transition-colors">Careers</Link>
+                       <Link href="#" className="hover:text-indigo-600 transition-colors">Contact</Link>
                     </div>
                  </div>
                  <div className="space-y-4">
-                    <h5 className="text-white font-bold text-sm tracking-widest uppercase">Help</h5>
+                    <h5 className="text-slate-900 font-bold text-sm tracking-widest uppercase">Help</h5>
                     <div className="flex flex-col gap-3 text-sm text-slate-500 font-semibold">
-                       <Link href="#" className="hover:text-indigo-400 transition-colors">Privacy</Link>
-                       <Link href="#" className="hover:text-indigo-400 transition-colors">Terms</Link>
-                       <Link href="#" className="hover:text-indigo-400 transition-colors">Support</Link>
+                       <Link href="#" className="hover:text-indigo-600 transition-colors">Privacy</Link>
+                       <Link href="#" className="hover:text-indigo-600 transition-colors">Terms</Link>
+                       <Link href="#" className="hover:text-indigo-600 transition-colors">Support</Link>
                     </div>
                  </div>
               </div>
            </div>
            
-           <div className="flex flex-col md:flex-row justify-between items-center gap-6 text-slate-500 text-xs font-bold uppercase tracking-widest border-t border-white/5 pt-10">
+           <div className="flex flex-col md:flex-row justify-between items-center gap-6 text-slate-400 text-[10px] font-black uppercase tracking-widest border-t border-slate-100 pt-10">
               <p>© 2026 Antigravity Labs. All rights reserved.</p>
               <div className="flex gap-8">
                  <Heart className="w-4 h-4 hover:text-rose-500 transition-colors cursor-pointer" />

@@ -194,16 +194,12 @@ def get_weather(destination: str = "Any"):
     return {"forecast": "Sunny, 26°C"}
 
 @app.post("/packing-list")
-def get_packing_list(request: schemas.TripRequest):
+def get_packing_list(request: schemas.PackingRequest):
     try:
         prompt = f"""
         Generate a comprehensive, itemized packing list for a trip to {request.destination}.
         Duration: {request.travel_dates}
         Travelers: {request.travelers}
-        Age Group: {request.age_group}
-        Budget: {request.budget}
-        Interests: {", ".join(request.interests)}
-        Stay: {request.stay_pref}
 
         Analyze the likely weather for {request.destination} during these dates and suggest appropriate clothing.
         

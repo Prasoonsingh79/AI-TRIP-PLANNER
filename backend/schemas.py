@@ -39,6 +39,11 @@ class TripRequest(BaseModel):
 class ChatRequest(BaseModel):
     message: str
 
+class PackingRequest(BaseModel):
+    destination: str
+    travel_dates: str
+    travelers: str
+
 class Trip(BaseModel):
     id: int
     destination: str
