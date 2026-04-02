@@ -17,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark scroll-smooth">
+    <html lang="en" className="dark" data-scroll-behavior="smooth">
       <body className={`${inter.className} min-h-screen bg-slate-950 text-slate-50 antialiased selection:bg-indigo-500/30 selection:text-white`}>
         <Navbar />
         <Sidebar />

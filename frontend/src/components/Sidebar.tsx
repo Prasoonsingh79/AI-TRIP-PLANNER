@@ -19,12 +19,9 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 
 const sidebarLinks = [
-  { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
   { name: "Trip Planner", href: "/planner", icon: Calendar },
-  { name: "Interactive Map", href: "/map", icon: MapIcon },
-  { name: "Saved Trips", href: "/saved", icon: Heart },
-  { name: "Chat AI", href: "/chat", icon: Compass },
-  { name: "History", href: "/history", icon: History },
+  { name: "Packing Assistant", href: "/packing", icon: ShieldCheck },
+  { name: "AI Chat", href: "/chat", icon: Compass },
 ];
 
 export function Sidebar() {

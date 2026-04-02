@@ -12,7 +12,7 @@ export function Navbar() {
   const links = [
     { name: "Home", href: "/" },
     { name: "Planner", href: "/planner" },
-    { name: "Map View", href: "/map" },
+    { name: "Packing Helper", href: "/packing" },
     { name: "AI Chat", href: "/chat" },
   ];
 
