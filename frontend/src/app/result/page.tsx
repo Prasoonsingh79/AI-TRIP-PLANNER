@@ -35,10 +35,22 @@ export default function ResultPage() {
   useEffect(() => {
     const data = localStorage.getItem("tripResult");
     if (data) {
-      setTripData(JSON.parse(data));
+      const parsedData = JSON.parse(data);
+      setTripData(parsedData);
+      
+      // Load weather
       axios.get("http://localhost:8000/weather?destination=Any")
         .then((res) => setWeather(res.data.forecast))
         .catch(() => setWeather("Sunny, 28°C"));
+
+      // Auto-save to history
+      const token = localStorage.getItem("token");
+      if (token) {
+        axios.post("http://localhost:8000/save-trip", parsedData, {
+          headers: { Authorization: `Bearer ${token}` }
+        }).then(() => console.log("Trip saved to history"))
+          .catch((err) => console.error("History sync failed:", err));
+      }
     } else {
       router.push("/planner");
     }

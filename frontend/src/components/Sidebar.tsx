@@ -22,6 +22,7 @@ const sidebarLinks = [
   { name: "Trip Planner", href: "/planner", icon: Calendar },
   { name: "Packing Assistant", href: "/packing", icon: ShieldCheck },
   { name: "AI Chat", href: "/chat", icon: Compass },
+  { name: "History", href: "/history", icon: History },
 ];
 
 export function Sidebar() {

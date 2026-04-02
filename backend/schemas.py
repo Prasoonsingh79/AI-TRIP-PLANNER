@@ -38,3 +38,13 @@ class TripRequest(BaseModel):
 
 class ChatRequest(BaseModel):
     message: str
+
+class Trip(BaseModel):
+    id: int
+    destination: str
+    itinerary_json: str
+    created_at: str # Simplification for now, or use datetime
+    user_id: int
+
+    class Config:
+        from_attributes = True

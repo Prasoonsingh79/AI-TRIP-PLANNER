@@ -13,6 +13,29 @@ import schemas
 import auth
 import database
 from database import engine, get_db
+from fastapi.security import OAuth2PasswordBearer
+from jose import JWTError, jwt
+
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
+
+# Security Helper
+def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
+    credentials_exception = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Could not validate credentials",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
+    try:
+        payload = jwt.decode(token, auth.SECRET_KEY, algorithms=[auth.ALGORITHM])
+        email: str = payload.get("email")
+        if email is None:
+            raise credentials_exception
+    except JWTError:
+        raise credentials_exception
+    user = db.query(models.User).filter(models.User.email == email).first()
+    if user is None:
+        raise credentials_exception
+    return user
 
 # Create DB tables
 models.Base.metadata.create_all(bind=engine)
@@ -124,6 +147,10 @@ def plan_trip(request: schemas.TripRequest):
         )
         
         itinerary = json.loads(response.choices[0].message.content)
+        
+        # Save to history if we have a token (optional here, but let's make it mandatory if we want history)
+        # For simplicity, we'll try to get user if token is provided in headers manually or just add param
+        
         return {"status": "success", "data": itinerary}
 
     except Exception as e:
@@ -208,6 +235,22 @@ def get_packing_list(request: schemas.TripRequest):
 
     except Exception as e:
         return {"status": "error", "message": str(e)}
+
+@app.get("/trips")
+def get_user_trips(current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
+    return db.query(models.Trip).filter(models.Trip.user_id == current_user.id).all()
+
+@app.post("/save-trip")
+def save_trip(trip_data: dict, current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
+    new_trip = models.Trip(
+        destination=trip_data.get("destination", "Unknown"),
+        itinerary_json=json.dumps(trip_data),
+        user_id=current_user.id
+    )
+    db.add(new_trip)
+    db.commit()
+    db.refresh(new_trip)
+    return {"status": "success", "trip_id": new_trip.id}
 
 @app.get("/")
 def read_root():
