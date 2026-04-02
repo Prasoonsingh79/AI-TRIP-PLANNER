@@ -100,10 +100,17 @@ export function Sidebar() {
           <Settings className="w-5 h-5 group-hover:rotate-45 transition-transform" />
           Settings
         </button>
-        <Link href="/auth/login" className="w-full flex items-center gap-4 px-6 py-4 text-rose-500/70 hover:text-rose-400 hover:bg-rose-500/10 transition-all text-sm font-black uppercase tracking-widest leading-none">
+        <button 
+          onClick={() => {
+            localStorage.removeItem("token");
+            document.cookie = "token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+            window.location.href = "/auth/login";
+          }}
+          className="w-full flex items-center gap-4 px-6 py-4 text-rose-500/70 hover:text-rose-400 hover:bg-rose-500/10 transition-all text-sm font-black uppercase tracking-widest leading-none"
+        >
           <LogOut className="w-5 h-5" />
           Disconnect
-        </Link>
+        </button>
       </div>
     </motion.aside>
   );

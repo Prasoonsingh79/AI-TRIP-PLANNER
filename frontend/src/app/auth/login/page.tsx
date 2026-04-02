@@ -34,8 +34,9 @@ export default function LoginPage() {
         throw new Error(data.detail || "Login failed");
       }
 
-      // Store token
+      // Store token in localStorage and cookies for middleware
       localStorage.setItem("token", data.access_token);
+      document.cookie = `token=${data.access_token}; path=/; max-age=86400; SameSite=Lax`;
       router.push("/planner");
     } catch (err: any) {
       setError(err.message);
