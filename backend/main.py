@@ -8,11 +8,8 @@ from dotenv import load_dotenv
 from typing import List
 
 # Internal imports
-import models
-import schemas
-import auth
-import database
-from database import engine, get_db
+from backend import models, schemas, auth, database
+from backend.database import engine, get_db
 from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, jwt
 
