@@ -8,6 +8,8 @@ import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
+import api from "@/lib/api";
+
 export default function LoginPage() {
   const router = useRouter();
   const [email, setEmail] = useState("");
@@ -23,17 +25,8 @@ export default function LoginPage() {
     setError("");
 
     try {
-      const response = await fetch("http://localhost:8000/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.detail || "Login failed");
-      }
+      const response = await api.post("/login", { email, password });
+      const data = response.data;
 
       // Store token in localStorage and cookies (SESSION ONLY - no max-age)
       localStorage.setItem("token", data.access_token);
@@ -45,7 +38,7 @@ export default function LoginPage() {
       }, 1500);
       
     } catch (err: any) {
-      setError(err.message);
+      setError(err.response?.data?.detail || err.message);
     } finally {
       if (!success) setLoading(false);
     }

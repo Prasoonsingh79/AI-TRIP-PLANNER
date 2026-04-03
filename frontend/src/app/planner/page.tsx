@@ -31,7 +31,7 @@ import {
 } from "@/components/ui/select";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import axios from "axios";
+import api from "@/lib/api";
 
 export default function PlannerForm() {
   const router = useRouter();
@@ -69,12 +69,12 @@ export default function PlannerForm() {
     
     setLoading(true);
     try {
-      const res = await axios.post("http://localhost:8000/plan-trip", formData);
+      const res = await api.post("/plan-trip", formData);
       localStorage.setItem("tripResult", JSON.stringify(res.data.data));
       router.push("/result");
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
-      alert("Failed to generate trip. Make sure the backend is running.");
+      alert(err.response?.data?.detail || "Failed to generate trip. Make sure the backend is running.");
       setLoading(false);
     }
   };
