@@ -36,7 +36,11 @@ export default function RegisterPage() {
       // Store token in localStorage and cookies for middleware
       localStorage.setItem("token", data.access_token);
       document.cookie = `token=${data.access_token}; path=/; max-age=86400; SameSite=Lax`;
-      router.push("/planner");
+      
+      // Delay slightly for the redirect to ensure cookies are ready.
+      setTimeout(() => {
+        window.location.href = "/planner";
+      }, 500);
     } catch (err: any) {
       setError(err.response?.data?.detail || err.message);
     } finally {

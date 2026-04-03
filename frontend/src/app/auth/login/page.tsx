@@ -34,8 +34,10 @@ export default function LoginPage() {
       
       setSuccess(true);
       setTimeout(() => {
-        router.push("/planner");
-      }, 1500);
+        // Use window.location.href for a hard redirect to ensure the middleware 
+        // immediately sees the new authentication cookie.
+        window.location.href = "/planner";
+      }, 2000); // Slightly longer delay to let the animation play out
       
     } catch (err: any) {
       setError(err.response?.data?.detail || err.message);
